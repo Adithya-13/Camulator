@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:camulator/src/features/presentation.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +45,10 @@ class ViewFinderWidget extends ConsumerWidget {
               var newWidth = state.width - dx * 2;
 
               controller.updateViewFinder(
-                height: newHeight > 0 ? newHeight : 0,
-                width: newWidth > 0 ? newWidth : 0,
-                top: state.top + dy,
-                left: state.left + dx,
+                height: newHeight >= 72 ? newHeight : null,
+                width: newWidth >= 72 ? newWidth : null,
+                top: newHeight >= 72 ? newHeight >= 72 ? state.top + dy : null : null,
+                left: newWidth >= 72 ? newWidth >= 72 ? state.left + dx : null : null,
               );
             },
           ),
@@ -58,10 +60,11 @@ class ViewFinderWidget extends ConsumerWidget {
           child: ManipulatingBall(
             onDrag: (dx, dy) {
               var newHeight = state.height - (dy * 2);
+              log(dy.toString());
 
               controller.updateViewFinder(
-                height: newHeight > 0 ? newHeight : 0,
-                top: state.top + dy,
+                height: newHeight >= 72 ? newHeight : null,
+                top: newHeight >= 72 ? newHeight >= 72 ? state.top + dy : null : null,
               );
             },
           ),
@@ -76,10 +79,10 @@ class ViewFinderWidget extends ConsumerWidget {
               var newWidth = state.width + dx * 2;
 
               controller.updateViewFinder(
-                height: newHeight > 0 ? newHeight : 0,
-                width: newWidth > 0 ? newWidth : 0,
-                top: state.top + dy,
-                left: state.left - dx,
+                height: newHeight >= 72 ? newHeight : null,
+                width: newWidth >= 72 ? newWidth : null,
+                top: newHeight >= 72 ? state.top + dy : null,
+                left: newWidth >= 72 ? state.left - dx : null,
               );
             },
           ),
@@ -93,8 +96,8 @@ class ViewFinderWidget extends ConsumerWidget {
               var newWidth = state.width + (dx * 2);
 
               controller.updateViewFinder(
-                left: state.left - dx,
-                width: newWidth > 0 ? newWidth : 0,
+                left: newWidth >= 72 ? state.left - dx : null,
+                width: newWidth >= 72 ? newWidth : null,
               );
             },
           ),
@@ -109,10 +112,10 @@ class ViewFinderWidget extends ConsumerWidget {
               var newWidth = state.width + dx * 2;
 
               controller.updateViewFinder(
-                height: newHeight > 0 ? newHeight : 0,
-                width: newWidth > 0 ? newWidth : 0,
-                top: state.top - dy,
-                left: state.left - dx,
+                height: newHeight >= 72 ? newHeight : null,
+                width: newWidth >= 72 ? newWidth : null,
+                top: newHeight >= 72 ? state.top - dy : null,
+                left: newWidth >= 72 ? state.left - dx : null,
               );
             },
           ),
@@ -126,8 +129,8 @@ class ViewFinderWidget extends ConsumerWidget {
               var newHeight = state.height + (dy * 2);
 
               controller.updateViewFinder(
-                top: state.top - dy,
-                height: newHeight > 0 ? newHeight : 0,
+                top: newHeight >= 72 ? state.top - dy : null,
+                height: newHeight >= 72 ? newHeight : null,
               );
             },
           ),
@@ -142,10 +145,10 @@ class ViewFinderWidget extends ConsumerWidget {
               var newWidth = state.width - dx * 2;
 
               controller.updateViewFinder(
-                height: newHeight > 0 ? newHeight : 0,
-                width: newWidth > 0 ? newWidth : 0,
-                top: state.top - dy,
-                left: state.left + dx,
+                height: newHeight >= 72 ? newHeight : null,
+                width: newWidth >= 72 ? newWidth : null,
+                top: newHeight >= 72 ? state.top - dy : null,
+                left: newWidth >= 72 ? state.left + dx : null,
               );
             },
           ),
@@ -159,8 +162,21 @@ class ViewFinderWidget extends ConsumerWidget {
               var newWidth = state.width - (dx * 2);
 
               controller.updateViewFinder(
+                left: newWidth >= 72 ? state.left + dx : null,
+                width: newWidth >= 72 ? newWidth : null,
+              );
+            },
+          ),
+        ),
+        // center center
+        Positioned(
+          top: state.top + state.height / 2 - ballDiameter / 2,
+          left: state.left + state.width / 2 - ballDiameter / 2,
+          child: ManipulatingBall(
+            onDrag: (dx, dy) {
+              controller.updateViewFinder(
+                top: state.top + dy,
                 left: state.left + dx,
-                width: newWidth > 0 ? newWidth : 0,
               );
             },
           ),
