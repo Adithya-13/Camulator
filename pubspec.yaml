@@ -1,0 +1,41 @@
+name: camulator
+description: A new Flutter project.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  camera: ^0.10.1
+  path_provider: ^2.0.11
+  google_mlkit_text_recognition: ^0.5.0
+  permission_handler: ^10.2.0
+  dotted_border: ^2.0.0+3
+  image: ^3.3.0
+  google_fonts: ^3.0.1
+  flutter_svg: ^1.1.6
+  image_picker: ^0.8.6
+  flutter_riverpod: ^2.1.1
+  flutter_screenutil: ^5.6.0
+  easy_localization: ^3.0.1
+
+dev_dependencies:
+  flutter_gen_runner: null
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter_gen:
+  integrations:
+    flutter_svg: true
+  
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/svgs/
