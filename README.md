@@ -2,6 +2,10 @@
 
 - [x] UI Slicing
 - [x] Create ViewFinder Widget
+- [x] add side of viewfinder widget
+- [x] filter only digit in OCR
+- [x] centerize the viewfinder
+- [x] set max height and width for viewfinder
 - [x] Detect Text
 - [ ] Calculate Detected Number
 - [ ] Change Operator

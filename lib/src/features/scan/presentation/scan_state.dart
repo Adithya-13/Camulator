@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+
 import 'package:camulator/src/features/domain.dart';
 import 'package:camulator/src/utils/utils.dart';
 
@@ -12,6 +13,8 @@ class ScanState {
   final File? selectedImage;
   final double top;
   final double left;
+  final double right;
+  final double bottom;
   final double height;
   final double width;
   final Operator selectedOperator;
@@ -21,10 +24,12 @@ class ScanState {
     this.isCameraInitialized = false,
     this.isCameraPermissionGranted = false,
     this.selectedImage,
-    this.top = 400,
-    this.left = 35,
-    this.height = 200,
-    this.width = 250,
+    this.top = 0,
+    this.left = 0,
+    this.right = 0,
+    this.bottom = 0,
+    this.height = 120,
+    this.width = 120,
     this.selectedOperator = Operator.division,
   });
 

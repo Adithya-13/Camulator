@@ -8,6 +8,7 @@ import 'package:camulator/src/features/scan/presentation/scan_state.dart';
 import 'package:camulator/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
@@ -21,10 +22,21 @@ class ScanController extends StateNotifier<ScanState> {
   final TextRecognizer _textRecognizer =
       TextRecognizer(script: TextRecognitionScript.latin);
   CameraController? cameraController;
+  final GlobalKey cameraKey = GlobalKey();
 
   void _init() {
     _initializeCamera();
     getPermissionStatus();
+    setLeftAndTop();
+  }
+
+  void setLeftAndTop() {
+    state = state.copyWith(
+      width: 390.w - 40,
+      height: 60,
+      left: 20,
+      top: 120,
+    );
   }
 
   Future<void> _initializeCamera() async {
@@ -129,14 +141,29 @@ class ScanController extends StateNotifier<ScanState> {
   Future<File> croppingImage(File file) async {
     var bytes = await file.readAsBytes();
     img.Image? src = img.decodeImage(bytes);
+    final RenderBox renderBox =
+        cameraKey.currentContext?.findRenderObject() as RenderBox;
+
+    final Size size = renderBox.size;
+
+    final resizedImage = img.copyResize(
+      src!,
+      width: size.width.round(),
+      height: size.height.round(),
+    );
 
     img.Image destImage = img.copyCrop(
-      src!,
-      state.left.toInt(),
-      state.top.toInt(),
-      state.width.toInt(),
-      state.height.toInt(),
+      resizedImage,
+      state.left.round(),
+      state.top.round(),
+      state.width.round(),
+      state.height.round(),
     );
+
+    dev.log(state.height.toString(), name: 'height');
+    dev.log(state.width.toString(), name: 'width');
+    dev.log(destImage.height.toString(), name: 'result height');
+    dev.log(destImage.width.toString(), name: 'result width');
 
     var jpg = img.encodeJpg(destImage);
     final Directory dir = await getTemporaryDirectory();
@@ -144,11 +171,10 @@ class ScanController extends StateNotifier<ScanState> {
     return await File(path).writeAsBytes(jpg);
   }
 
-  Future<String> processImage(InputImage inputImage) async {
+  Future<String?> processImage(InputImage inputImage) async {
     final RecognizedText recognizedText =
         await _textRecognizer.processImage(inputImage);
 
-    String text = recognizedText.text;
     for (TextBlock block in recognizedText.blocks) {
       final Rect blockRect = block.boundingBox;
       final List<Point<int>> blockCornerPoints = block.cornerPoints;
@@ -160,14 +186,17 @@ class ScanController extends StateNotifier<ScanState> {
         final String lineText = line.text;
         // Same getters as TextBlock
         for (TextElement element in line.elements) {
-          final Rect elementRect = line.boundingBox;
-          final List<Point<int>> elementCornerPoints = line.cornerPoints;
-          final String elementText = line.text;
+          final Rect elementRect = element.boundingBox;
+          final List<Point<int>> elementCornerPoints = element.cornerPoints;
+          final String elementText = element.text;
           // Same getters as TextBlock
+          if (elementText.isNumeric) {
+            return elementText;
+          }
         }
       }
     }
-    return text;
+    return null;
   }
 
   void setSelectedImage(File? image) {
@@ -212,6 +241,7 @@ class ScanController extends StateNotifier<ScanState> {
     double? height,
     double? width,
   }) {
+    dev.log('left: $left, top: $top, width: $width, height: $height');
     state = state.copyWith(
       top: top,
       left: left,

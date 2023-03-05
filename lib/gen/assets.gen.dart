@@ -18,6 +18,9 @@ class $AssetsSvgsGen {
   SvgGenImage get additionIcon =>
       const SvgGenImage('assets/svgs/addition_icon.svg');
 
+  /// File path: assets/svgs/corner.svg
+  SvgGenImage get corner => const SvgGenImage('assets/svgs/corner.svg');
+
   /// File path: assets/svgs/division_icon.svg
   SvgGenImage get divisionIcon =>
       const SvgGenImage('assets/svgs/division_icon.svg');
@@ -41,6 +44,7 @@ class $AssetsSvgsGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         additionIcon,
+        corner,
         divisionIcon,
         galleryIcon,
         multiplicaitionIcon,
