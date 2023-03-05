@@ -176,18 +176,19 @@ class ScanController extends StateNotifier<ScanState> {
         await _textRecognizer.processImage(inputImage);
 
     for (TextBlock block in recognizedText.blocks) {
-      final Rect blockRect = block.boundingBox;
-      final List<Point<int>> blockCornerPoints = block.cornerPoints;
-      final String blockText = block.text;
+      block.lines.sort(
+        (a, b) => a.boundingBox.size.longestSide
+            .compareTo(b.boundingBox.size.longestSide),
+      );
 
       for (TextLine line in block.lines) {
-        final Rect lineRect = line.boundingBox;
-        final List<Point<int>> lineCornerPoints = line.cornerPoints;
-        final String lineText = line.text;
+        line.elements.sort(
+          (a, b) => a.boundingBox.size.longestSide
+              .compareTo(b.boundingBox.size.longestSide),
+        );
+
         // Same getters as TextBlock
         for (TextElement element in line.elements) {
-          final Rect elementRect = element.boundingBox;
-          final List<Point<int>> elementCornerPoints = element.cornerPoints;
           final String elementText = element.text;
           // Same getters as TextBlock
           if (elementText.isNumeric) {
