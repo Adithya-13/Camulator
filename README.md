@@ -1,4 +1,3 @@
 # camulator
 
-[] LTR / RTL Feature
-[]
+- [x] LTR / RTL Feature
