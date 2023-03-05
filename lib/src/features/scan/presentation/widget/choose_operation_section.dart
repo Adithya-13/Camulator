@@ -12,8 +12,8 @@ class ChooseOperationSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(scanControllerProvider);
-    final controller = ref.read(scanControllerProvider.notifier);
+    final state = ref.watch(calculationControllerProvider);
+    final controller = ref.read(calculationControllerProvider.notifier);
 
     return Row(
       mainAxisSize: MainAxisSize.min,

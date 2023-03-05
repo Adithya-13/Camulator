@@ -206,12 +206,6 @@ class ScanController extends StateNotifier<ScanState> {
     );
   }
 
-  void setSelectedOperator(Operator operator) {
-    state = state.copyWith(
-      selectedOperator: operator,
-    );
-  }
-
   String randomNonceString([int length = 32]) {
     final random = Random();
 
@@ -253,6 +247,6 @@ class ScanController extends StateNotifier<ScanState> {
 }
 
 final scanControllerProvider =
-    StateNotifierProvider<ScanController, ScanState>((ref) {
+    StateNotifierProvider.autoDispose<ScanController, ScanState>((ref) {
   return ScanController();
 });

@@ -1,2 +1,2 @@
-export 'scan/domain/operator.dart';
-export 'scan/domain/corner_type.dart';
+export 'calculation/domain/domain.dart';
+export 'scan/domain/domain.dart';

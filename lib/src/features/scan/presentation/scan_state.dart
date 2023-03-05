@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -17,7 +16,6 @@ class ScanState {
   final double bottom;
   final double height;
   final double width;
-  final Operator selectedOperator;
 
   const ScanState({
     this.cameras = const [],
@@ -30,7 +28,6 @@ class ScanState {
     this.bottom = 0,
     this.height = 120,
     this.width = 120,
-    this.selectedOperator = Operator.division,
   });
 
   ScanState copyWith({
@@ -42,7 +39,6 @@ class ScanState {
     double? left,
     double? height,
     double? width,
-    Operator? selectedOperator,
   }) {
     return ScanState(
       cameras: cameras ?? this.cameras,
@@ -55,7 +51,6 @@ class ScanState {
       left: left ?? this.left,
       height: height ?? this.height,
       width: width ?? this.width,
-      selectedOperator: selectedOperator ?? this.selectedOperator,
     );
   }
 }
