@@ -20,7 +20,7 @@ class ChooseOperationSection extends ConsumerWidget {
       children: [
         OperatorChipWidget(
           isSelected: state.selectedOperator == Operator.addition,
-          operator: Operator.addition,
+          operator: Operator.addition, 
           onTap: () {
             controller.setSelectedOperator(Operator.addition);
           },

@@ -39,9 +39,10 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
   void initState() {
     //TODO: still technical debt, to set initial left and top offset
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Future.delayed(const Duration(milliseconds: 200))
-          .then((value) => controller.setLeftAndTop());
-      controller.setLeftAndTop();
+      Future.delayed(const Duration(milliseconds: 200)).then(
+        (value) => controller.setLeftAndTop(context),
+      );
+      controller.setLeftAndTop(context);
     });
     super.initState();
   }
@@ -49,6 +50,7 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(scanControllerProvider);
+    final calculationState = ref.watch(calculationControllerProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -118,22 +120,13 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
                 );
               },
             ),
-            // if (state.selectedImage != null)
-            //   Positioned(
-            //     left: 0,
-            //     right: 0,
-            //     top: 0,
-            //     bottom: 0,
-            //     child: GestureDetector(
-            //       onTap: () {
-            //         controller.setSelectedImage(null);
-            //       },
-            //       child: Image.file(
-            //         state.selectedImage!,
-            //         fit: BoxFit.contain,
-            //       ),
-            //     ),
-            //   ),
+            if (calculationState.result != null)
+              const Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                child: ResultWidget(),
+              ),
           ],
         ),
       ),

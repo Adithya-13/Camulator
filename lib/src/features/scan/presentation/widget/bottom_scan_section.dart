@@ -1,4 +1,3 @@
-
 import 'package:camulator/gen/assets.gen.dart';
 import 'package:camulator/src/constants/constants.dart';
 import 'package:camulator/src/features/presentation.dart';
@@ -13,6 +12,8 @@ class BottomScanSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.read(scanControllerProvider.notifier);
+    final calculationController =
+        ref.read(calculationControllerProvider.notifier);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -20,18 +21,10 @@ class BottomScanSection extends ConsumerWidget {
           width: SizeApp.w36,
           fit: BoxFit.fitWidth,
         ),
-        InkWell(
+        GestureDetector(
           onTap: () async {
-            final scaffoldMessenger = ScaffoldMessenger.of(context);
-            scaffoldMessenger.clearSnackBars();
-            final text = await controller.onTextRecognition();
-            scaffoldMessenger.showSnackBar(
-              SnackBar(
-                content: Text(
-                  text ?? '',
-                ),
-              ),
-            );
+            final number = await controller.onTextRecognition();
+            calculationController.insertCalculation(number: number);
           },
           child: Stack(
             alignment: Alignment.center,

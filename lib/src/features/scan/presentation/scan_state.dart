@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-
-import 'package:camulator/src/features/domain.dart';
 import 'package:camulator/src/utils/utils.dart';
 
 class ScanState {
@@ -12,8 +10,6 @@ class ScanState {
   final File? selectedImage;
   final double top;
   final double left;
-  final double right;
-  final double bottom;
   final double height;
   final double width;
 
@@ -24,8 +20,6 @@ class ScanState {
     this.selectedImage,
     this.top = 0,
     this.left = 0,
-    this.right = 0,
-    this.bottom = 0,
     this.height = 120,
     this.width = 120,
   });

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:camera/camera.dart';
-import 'package:camulator/src/features/domain.dart';
 import 'package:camulator/src/features/scan/presentation/scan_state.dart';
 import 'package:camulator/src/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -27,15 +26,14 @@ class ScanController extends StateNotifier<ScanState> {
   void _init() {
     _initializeCamera();
     getPermissionStatus();
-    setLeftAndTop();
   }
 
-  void setLeftAndTop() {
+  void setLeftAndTop(BuildContext context) {
     state = state.copyWith(
       width: 390.w - 40,
       height: 60,
       left: 20,
-      top: 120,
+      top: context.screenHeightPercentage(0.32),
     );
   }
 
@@ -123,7 +121,7 @@ class ScanController extends StateNotifier<ScanState> {
     cameraController?.setFocusPoint(offset);
   }
 
-  Future<String?> onTextRecognition() async {
+  Future<double?> onTextRecognition() async {
     XFile? rawImage = await takePicture();
     if (rawImage == null) {
       return null;
@@ -171,7 +169,7 @@ class ScanController extends StateNotifier<ScanState> {
     return await File(path).writeAsBytes(jpg);
   }
 
-  Future<String?> processImage(InputImage inputImage) async {
+  Future<double?> processImage(InputImage inputImage) async {
     final RecognizedText recognizedText =
         await _textRecognizer.processImage(inputImage);
 
@@ -192,7 +190,7 @@ class ScanController extends StateNotifier<ScanState> {
           final String elementText = element.text;
           // Same getters as TextBlock
           if (elementText.isNumeric) {
-            return elementText;
+            return double.tryParse(elementText);
           }
         }
       }

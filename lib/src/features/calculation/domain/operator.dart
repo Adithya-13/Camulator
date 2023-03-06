@@ -43,7 +43,7 @@ extension XOperator on Operator {
       case Operator.subtraction:
         return 'Subtraction';
       case Operator.multiplication:
-        return 'Division';
+        return 'Multiplication';
       case Operator.division:
         return 'Division';
     }
