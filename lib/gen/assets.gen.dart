@@ -33,6 +33,10 @@ class $AssetsSvgsGen {
   SvgGenImage get multiplicaitionIcon =>
       const SvgGenImage('assets/svgs/multiplicaition_icon.svg');
 
+  /// File path: assets/svgs/rollback_icon.svg
+  SvgGenImage get rollbackIcon =>
+      const SvgGenImage('assets/svgs/rollback_icon.svg');
+
   /// File path: assets/svgs/setting_icon.svg
   SvgGenImage get settingIcon =>
       const SvgGenImage('assets/svgs/setting_icon.svg');
@@ -48,6 +52,7 @@ class $AssetsSvgsGen {
         divisionIcon,
         galleryIcon,
         multiplicaitionIcon,
+        rollbackIcon,
         settingIcon,
         subtractionIcon
       ];

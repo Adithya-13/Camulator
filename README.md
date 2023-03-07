@@ -7,8 +7,9 @@
 - [x] centerize the viewfinder
 - [x] set max height and width for viewfinder
 - [x] Detect Text
-- [ ] Calculate Detected Number
-- [ ] Change Operator
+- [x] Calculate Detected Number
+- [x] Change Operator
+- [x] Rollback
 - [ ] Show History of Calculation
-- [ ] Show Result at the top of screen
+- [x] Show Result at the top of screen
 - [ ] LTR / RTL Feature

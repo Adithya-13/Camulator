@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:camulator/gen/assets.gen.dart';
 import 'package:camulator/src/common_widgets/common_widgets.dart';
 import 'package:camulator/src/constants/constants.dart';
 import 'package:camulator/src/features/presentation.dart';
@@ -107,6 +108,12 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
                               ),
                             ),
                             const ViewFinderWidget(),
+                            if (calculationState.result != null)
+                              Positioned(
+                                left: SizeApp.h12,
+                                bottom: SizeApp.h12,
+                                child: const RollbackWidget(),
+                              ),
                           ],
                         ),
                       ),
@@ -128,6 +135,31 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
                 child: ResultWidget(),
               ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class RollbackWidget extends ConsumerWidget {
+  const RollbackWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.read(calculationControllerProvider.notifier);
+    return GestureDetector(
+      onTap: controller.rollback,
+      child: Container(
+        decoration: const ShapeDecoration(
+          shape: CircleBorder(),
+          color: ColorApp.black,
+        ),
+        padding: EdgeInsets.all(SizeApp.h16),
+        child: Assets.svgs.rollbackIcon.svg(
+          fit: BoxFit.fitWidth,
+          width: SizeApp.w20,
         ),
       ),
     );
