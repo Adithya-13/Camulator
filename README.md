@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="demo/cover-camulator.png"/>
+  <img src="https://i.ibb.co/d5pBM7L/cover.png"/>
 </p>
 
 ## Table of Contents
@@ -35,8 +35,6 @@ The challenges that i've experienced is:
 1. Create a library by myself
 
 i created Viewfinder Widget (not published in pub.dev yet) which i never create before.
-
-## vids for widget
 
 this widget is like photomath app, the purpose of this widget is to crop the image, but before the image takken.
 
@@ -73,13 +71,9 @@ https://github.com/Adithya-13/Camulator.git
 
 ## Demo
 
-|Dashboard|Detail Restaurant|Search Restaurant|Add Review|
-|--|--|--|--|
-|![](demo/dashboard.gif)|![](demo/detail.gif)|![](demo/search.gif)|![](demo/add-review.gif)|
-
-|Favorite|Unfavorite|Search Favorite|
-|--|--|--|
-|![](demo/favorite.gif)|![](demo/unfavorite.gif)|![](demo/search-favorite.gif)|
+|Camulator|
+|--|
+|![](https://i.ibb.co/5Wtpc5s/vid.gif)|
 
 ## Features
 - Calculate with Camera for all of operations (Addition, Subtraction, Multiplication, Division)
