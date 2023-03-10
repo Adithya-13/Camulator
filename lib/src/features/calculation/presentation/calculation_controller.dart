@@ -37,8 +37,9 @@ class CalculationController extends StateNotifier<CalculationState> {
       final templist = List<Operation>.from(state.operations, growable: true);
       templist.add(operation);
 
+      setOperations(templist);
+
       state = state.copyWith(
-        operations: templist,
         prevOperator: state.selectedOperator,
       );
     } else {
@@ -48,9 +49,7 @@ class CalculationController extends StateNotifier<CalculationState> {
       final templist = List<Operation>.from(state.operations, growable: true);
       templist.last = operation;
 
-      state = state.copyWith(
-        operations: templist,
-      );
+      setOperations(templist);
     }
 
     calculateResult();
@@ -63,9 +62,14 @@ class CalculationController extends StateNotifier<CalculationState> {
     for (var operation in state.operations) {
       total = operation.total(total);
     }
-    print(total);
     state = state.copyWith(
       result: Wrapped.value(total),
+    );
+  }
+
+  void setOperations(List<Operation> operations) {
+    state = state.copyWith(
+      operations: operations,
     );
   }
 
@@ -91,9 +95,27 @@ class CalculationController extends StateNotifier<CalculationState> {
       templist.last.numbers.removeLast();
     }
 
+    setOperations(templist);
+
+    calculateResult();
+
     state = state.copyWith(
-      operations: templist,
+      addedNumber: const Wrapped.value(null),
+      selectedOperator: state.prevOperator,
     );
+  }
+
+  void deleteNumber(int operationIndex, int index) {
+    final templist = List<Operation>.from(state.operations, growable: true);
+    final selectedOperation = templist[operationIndex];
+    if (selectedOperation.numbers.length == 1) {
+      templist.removeAt(operationIndex);
+    } else {
+      selectedOperation.numbers.removeAt(index);
+      templist[operationIndex] = selectedOperation;
+    }
+
+    setOperations(templist);
 
     calculateResult();
 

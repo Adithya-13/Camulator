@@ -29,6 +29,20 @@ class Operation {
         totalOperation = numbers.fold(
             initialValue, (previousValue, element) => previousValue / element);
         return totalOperation;
+      case Operator.result:
+        return totalOperation;
     }
+  }
+
+  Operation copyWith({
+    Operator? operator,
+    List<double>? numbers,
+    double? totalOperation,
+  }) {
+    return Operation(
+      operator: operator ?? this.operator,
+      numbers: numbers ?? this.numbers,
+      totalOperation: totalOperation ?? this.totalOperation,
+    );
   }
 }

@@ -1,11 +1,6 @@
-import 'package:camera/camera.dart';
-import 'package:camulator/gen/assets.gen.dart';
-import 'package:camulator/src/common_widgets/common_widgets.dart';
-import 'package:camulator/src/constants/constants.dart';
 import 'package:camulator/src/features/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScanScreen extends ConsumerStatefulWidget {
   const ScanScreen({super.key});
@@ -19,22 +14,8 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
   ScanController get controller => ref.read(scanControllerProvider.notifier);
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController? cameraController = controller.cameraController;
-
-    // App state changed before we got the chance to initialize.
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return;
-    }
-
-    if (state == AppLifecycleState.inactive) {
-      // Free up memory when camera not active
-      cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      // Reinitialize the camera with same properties
-      controller.onNewCameraSelected(cameraController.description);
-    }
-  }
+  void didChangeAppLifecycleState(AppLifecycleState state) =>
+      controller.handleLifecycleCamera(state);
 
   @override
   void initState() {
@@ -60,71 +41,11 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
             Builder(
               builder: (context) {
                 if (!state.isCameraPermissionGranted) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Permission denied',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: controller.getPermissionStatus,
-                        child: const Text('Give permission'),
-                      ),
-                    ],
-                  );
+                  return PermissionSection(controller: controller);
                 }
                 if (!state.isCameraInitialized) return Container();
 
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.r),
-                        child: Stack(
-                          children: [
-                            Positioned.fill(
-                              child: ColorFiltered(
-                                colorFilter: ColorFilter.mode(
-                                  ColorApp.black.withOpacity(0.3),
-                                  BlendMode.multiply,
-                                ),
-                                child: CameraPreview(
-                                  key: controller.cameraKey,
-                                  controller.cameraController!,
-                                  child: LayoutBuilder(
-                                    builder: (BuildContext context,
-                                        BoxConstraints constraints) {
-                                      return GestureDetector(
-                                        behavior: HitTestBehavior.opaque,
-                                        onTapDown: (details) =>
-                                            controller.onViewFinderTap(
-                                                details, constraints),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const ViewFinderWidget(),
-                            if (calculationState.result != null)
-                              Positioned(
-                                left: SizeApp.h12,
-                                bottom: SizeApp.h12,
-                                child: const RollbackWidget(),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Gap.h12,
-                    const ChooseOperationSection(),
-                    Gap.h24,
-                    const BottomScanSection(),
-                    Gap.h16,
-                  ],
-                );
+                return const CameraSection();
               },
             ),
             if (calculationState.result != null)
@@ -135,31 +56,6 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
                 child: ResultWidget(),
               ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class RollbackWidget extends ConsumerWidget {
-  const RollbackWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(calculationControllerProvider.notifier);
-    return GestureDetector(
-      onTap: controller.rollback,
-      child: Container(
-        decoration: const ShapeDecoration(
-          shape: CircleBorder(),
-          color: ColorApp.black,
-        ),
-        padding: EdgeInsets.all(SizeApp.h16),
-        child: Assets.svgs.rollbackIcon.svg(
-          fit: BoxFit.fitWidth,
-          width: SizeApp.w20,
         ),
       ),
     );

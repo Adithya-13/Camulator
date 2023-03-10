@@ -12,4 +12,5 @@ class ColorApp {
   static const Color darkRed = Color(0xFF331515);
   static const Color darkYellow = Color(0xFF323300);
   static const Color darkBlue = Color(0xFF121B32);
+  static const Color darkPurple = Color(0xFF200945);
 }

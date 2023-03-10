@@ -10,6 +10,7 @@
 - [x] Calculate Detected Number
 - [x] Change Operator
 - [x] Rollback
-- [ ] Show History of Calculation
+- [x] Show History of Calculation
+- [ ] thousand format
 - [x] Show Result at the top of screen
 - [ ] LTR / RTL Feature

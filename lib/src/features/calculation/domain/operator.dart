@@ -8,6 +8,7 @@ enum Operator {
   subtraction,
   multiplication,
   division,
+  result,
 }
 
 extension XOperator on Operator {
@@ -33,6 +34,11 @@ extension XOperator on Operator {
           fit: BoxFit.fitWidth,
           width: SizeApp.w16,
         );
+      case Operator.result:
+        return Assets.svgs.equalityIcon.svg(
+          fit: BoxFit.fitWidth,
+          width: SizeApp.w16,
+        );
     }
   }
 
@@ -46,6 +52,8 @@ extension XOperator on Operator {
         return 'Multiplication';
       case Operator.division:
         return 'Division';
+      case Operator.result:
+        return 'Result';
     }
   }
 
@@ -59,6 +67,8 @@ extension XOperator on Operator {
         return ColorApp.darkYellow;
       case Operator.division:
         return ColorApp.darkBlue;
+      case Operator.result:
+        return ColorApp.darkPurple;
     }
   }
 }

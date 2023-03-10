@@ -61,11 +61,6 @@ class ScanController extends StateNotifier<ScanState> {
       this.cameraController = cameraController;
     }
 
-    // // Update UI if controller updated
-    // cameraController.addListener(() {
-    //   if (mounted) state = state.copyWith();
-    // });
-
     // Initialize controller
     try {
       await cameraController.initialize();
@@ -241,6 +236,23 @@ class ScanController extends StateNotifier<ScanState> {
       height: height,
       width: width,
     );
+  }
+
+  void handleLifecycleCamera(AppLifecycleState state) {
+    final CameraController? cameraController = this.cameraController;
+
+    // App state changed before we got the chance to initialize.
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      // Free up memory when camera not active
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      // Reinitialize the camera with same properties
+      onNewCameraSelected(cameraController.description);
+    }
   }
 }
 

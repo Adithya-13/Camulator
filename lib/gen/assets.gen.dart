@@ -25,6 +25,10 @@ class $AssetsSvgsGen {
   SvgGenImage get divisionIcon =>
       const SvgGenImage('assets/svgs/division_icon.svg');
 
+  /// File path: assets/svgs/equality_icon.svg
+  SvgGenImage get equalityIcon =>
+      const SvgGenImage('assets/svgs/equality_icon.svg');
+
   /// File path: assets/svgs/gallery_icon.svg
   SvgGenImage get galleryIcon =>
       const SvgGenImage('assets/svgs/gallery_icon.svg');
@@ -50,6 +54,7 @@ class $AssetsSvgsGen {
         additionIcon,
         corner,
         divisionIcon,
+        equalityIcon,
         galleryIcon,
         multiplicaitionIcon,
         rollbackIcon,
