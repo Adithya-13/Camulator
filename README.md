@@ -11,6 +11,9 @@
 - [x] Change Operator
 - [x] Rollback
 - [x] Show History of Calculation
-- [ ] thousand format
+- [x] thousand format
 - [x] Show Result at the top of screen
 - [ ] LTR / RTL Feature
+- [ ] android still bug
+- [ ] handle use flash or not (android automatically still flash)
+- [ ] add indicator when capture
