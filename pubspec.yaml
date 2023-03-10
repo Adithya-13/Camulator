@@ -25,6 +25,7 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   auto_size_text: ^3.0.0
   collection: ^1.17.1
+  flutter_native_splash: ^2.2.16
 
 dev_dependencies:
   flutter_gen_runner: null
@@ -45,3 +46,8 @@ flutter:
 
   assets:
     - assets/svgs/
+    - assets/images/
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/images/logo.png

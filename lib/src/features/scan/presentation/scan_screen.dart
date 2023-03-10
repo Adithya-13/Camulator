@@ -22,7 +22,10 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
     //TODO: still technical debt, to set initial left and top offset
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(milliseconds: 200)).then(
-        (value) => controller.setLeftAndTop(context),
+        (value) {
+          controller.setLeftAndTop(context);
+          controller.getPermissionStatus();
+        },
       );
       controller.setLeftAndTop(context);
     });
@@ -41,7 +44,9 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
             Builder(
               builder: (context) {
                 if (!state.isCameraPermissionGranted) {
-                  return PermissionSection(controller: controller);
+                  return Positioned.fill(
+                    child: PermissionSection(controller: controller),
+                  );
                 }
                 if (!state.isCameraInitialized) return Container();
 

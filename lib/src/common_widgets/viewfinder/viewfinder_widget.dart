@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:camulator/gen/assets.gen.dart';
 import 'package:camulator/src/constants/constants.dart';
 import 'package:camulator/src/features/domain.dart';
@@ -64,26 +62,6 @@ class ViewFinderWidget extends ConsumerWidget {
             },
           ),
         ),
-        // // top middle
-        // Positioned(
-        //   top: state.top - ballDiameter / 2,
-        //   left: state.left + state.width / 2 - ballDiameter / 2,
-        //   child: CornerViewFinder(
-        //     onDrag: (dx, dy) {
-        //       var newHeight = state.height - (dy * 2);
-        //       log(dy.toString());
-
-        //       controller.updateViewFinder(
-        //         height: newHeight >= 72 ? newHeight : null,
-        //         top: newHeight >= 72
-        //             ? newHeight >= 72
-        //                 ? state.top + dy
-        //                 : null
-        //             : null,
-        //       );
-        //     },
-        //   ),
-        // ),
         // top right
         Positioned(
           top: state.top,
@@ -109,21 +87,6 @@ class ViewFinderWidget extends ConsumerWidget {
             },
           ),
         ),
-        // // center right
-        // Positioned(
-        //   top: state.top + state.height / 2 - ballDiameter / 2,
-        //   left: state.left + state.width - ballDiameter / 2,
-        //   child: CornerViewFinder(
-        //     onDrag: (dx, dy) {
-        //       var newWidth = state.width + (dx * 2);
-
-        //       controller.updateViewFinder(
-        //         left: newWidth >= 72 ? state.left - dx : null,
-        //         width: newWidth >= 72 ? newWidth : null,
-        //       );
-        //     },
-        //   ),
-        // ),
         // bottom right
         Positioned(
           top: state.top + state.height - ballDiameter / 2,
@@ -149,21 +112,6 @@ class ViewFinderWidget extends ConsumerWidget {
             },
           ),
         ),
-        // // bottom center
-        // Positioned(
-        //   top: state.top + state.height - ballDiameter / 2,
-        //   left: state.left + state.width / 2 - ballDiameter / 2,
-        //   child: CornerViewFinder(
-        //     onDrag: (dx, dy) {
-        //       var newHeight = state.height + (dy * 2);
-
-        //       controller.updateViewFinder(
-        //         top: newHeight >= 72 ? state.top - dy : null,
-        //         height: newHeight >= 72 ? newHeight : null,
-        //       );
-        //     },
-        //   ),
-        // ),
         // bottom left
         Positioned(
           top: state.top + state.height - ballDiameter / 2,
@@ -189,21 +137,6 @@ class ViewFinderWidget extends ConsumerWidget {
             },
           ),
         ),
-        // //left center
-        // Positioned(
-        //   top: state.top + state.height / 2 - ballDiameter / 2,
-        //   left: state.left - ballDiameter / 2,
-        //   child: CornerViewFinder(
-        //     onDrag: (dx, dy) {
-        //       var newWidth = state.width - (dx * 2);
-
-        //       controller.updateViewFinder(
-        //         left: newWidth >= 72 ? state.left + dx : null,
-        //         width: newWidth >= 72 ? newWidth : null,
-        //       );
-        //     },
-        //   ),
-        // ),
       ],
     );
   }

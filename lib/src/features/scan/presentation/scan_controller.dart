@@ -185,7 +185,7 @@ class ScanController extends StateNotifier<ScanState> {
           final String elementText = element.text;
           // Same getters as TextBlock
           if (elementText.isNumeric) {
-            return double.tryParse(elementText);
+            return elementText.toDoubleWithCommas;
           }
         }
       }

@@ -1,5 +1,6 @@
 import 'package:camulator/src/constants/constants.dart';
 import 'package:camulator/src/features/presentation.dart';
+import 'package:camulator/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class PermissionSection extends StatelessWidget {
@@ -22,9 +23,15 @@ class PermissionSection extends StatelessWidget {
         const SizedBox(height: 16),
         ElevatedButton(
           onPressed: controller.getPermissionStatus,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorApp.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+            ),
+          ),
           child: Text(
             'Give permission',
-            style: TypographyTheme.body,
+            style: TypographyTheme.body.white,
           ),
         ),
       ],
