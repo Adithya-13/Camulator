@@ -73,7 +73,7 @@ https://github.com/Adithya-13/Camulator.git
 
 |Camulator|
 |--|
-|![](https://i.ibb.co/5Wtpc5s/vid.gif)|
+|![](/vid.gif?raw=true)|
 
 ## Features
 - Calculate with Camera for all of operations (Addition, Subtraction, Multiplication, Division)
